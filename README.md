@@ -213,10 +213,12 @@ PwwerStore Details
 
 Management IP Address: 172.24.xxx.xxx
 
+
 GlobalID: PSxx2c5cbxxxx4
 
 
 user: rancher
+
 
 password: xxxxxxxxxxxx
 
@@ -226,7 +228,9 @@ iSCSI Discovery IP: 172.24.xxx.xxx
 
 NAS Server Name: csi-nas
 
+
 NAS Server IP: 172.24.xxx.xxx
+
 
 
 01. Clone the powerstore CSI drives repo
