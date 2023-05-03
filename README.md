@@ -6,7 +6,9 @@ RKE2 Installation [@RKE2 Installation Guide](https://ranchermanager.docs.rancher
 
 ## RKE2 Installation
 
-![Diagram1](https://github.com/cha2ranga/k8s-installation/blob/main/images/diagram1.jpg)
+Activity flow,
+![Diagram](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/diagram1.jpg)
+
 
 Install Rocky linux 9 vms and update the packages. In this CSI-Drivers installation, we are going to use iSCSI and NFS options. make sure to install iscsi and multipath packages as well. 
 
