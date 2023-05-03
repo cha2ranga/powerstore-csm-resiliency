@@ -73,7 +73,7 @@ complete -o default -F __start_kubectl k
 NAME      STATUS   ROLES                       AGE     VERSION
 rke2-m1   Ready    control-plane,etcd,master   9m31s   v1.24.12+rke2r1
 
-## this file contains cluster details. you can rename it as kubeconfig and use it. you can even copy it to .kube/config directoyr
+## this file contains cluster details. you can rename it as kubeconfig and use it. you can even copy it to .kube/config directoy
 
 /etc/rancher/rke2/rke2.yaml
 
@@ -101,7 +101,7 @@ journalctl -u rke2-agent.service -f
 ```
 
 
-## uninstall script is in /usr/bin/rke2-uninstall.sh
+## uninstall script is in /usr/bin/rke2-uninstall.sh (Incase if you want to clean up and reinstall the packages)
 
 ```bash
 curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
@@ -212,14 +212,20 @@ volumesnapshot CRD is avaialble with the default RKE2 installation.
 PwwerStore Details
 
 Management IP Address: 172.24.xxx.xxx
+
 GlobalID: PSxx2c5cbxxxx4
 
+
 user: rancher
+
 password: xxxxxxxxxxxx
+
 
 iSCSI Discovery IP: 172.24.xxx.xxx
 
+
 NAS Server Name: csi-nas
+
 NAS Server IP: 172.24.xxx.xxx
 
 
@@ -265,6 +271,7 @@ powerstore-config   Opaque   1      79s
 06. copy sameple powerstore csi helm values and edit. (refer my-powerstore-settings.yaml)
 
 When it comes to PowerStore CSI resiliency, enable following podmon parameters,
+
 ![podmon](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/podmon.jpg)
 
 07. Install the csi drives
@@ -274,6 +281,7 @@ When it comes to PowerStore CSI resiliency, enable following podmon parameters,
 
 Since we are installing only iSCSI and NFS, you can ignore the NVMe warnings. 
 Installation output. 
+
 ![CSI Drivers Installation Output](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/csi_installation_output.jpg)
 
 
@@ -308,9 +316,11 @@ statefulset.yaml >>>>> no resiliency configured
 You can apply both yaml file to create statefulset
 
 Statis of the staefulsets,
+
 ![workloads](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs1.jpg)
 
 PVC Status
+
 ![pvc](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs2.jpg)
 
 
@@ -320,6 +330,7 @@ As you can see below, PVC is attached to rke2-w1
 ![PowerStore](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs3.jpg)
 
 Now let's shutdown the "rke2-w1" node. 
+
 ![Node Down](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs4.jpg)
 
 
