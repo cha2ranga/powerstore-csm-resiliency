@@ -20,15 +20,19 @@ touch /etc/rancher/rke2/config.yaml
 if you add yum repo file you will end up with sha1 issue. easy way is use curl commad
 
 for the servers, this will install latest stable release 
+```bash
 curl -sfL https://get.rke2.io | sh -
-
+```
 
 for the workers you can first download the script. then set the environment variable as "agent"  
 (anther way  curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
+
+```bash
 curl -sfL https://get.rke2.io --output install.sh
 chmod +x install.sh
 export INSTALL_RKE2_TYPE=agent
  ./install.sh
+```
 
 INSTALL_RKE2_TYPE
 Type of rke2 service. Can be either "server" or "agent".
@@ -36,18 +40,19 @@ Default is "server".
 
 
 ## enable services for server nodes
+```bash
 systemctl enable rke2-server
 systemctl start rke2-server
 journalctl -u rke2-server -f
-
+```
 package will be install under /var/lib/rancher/rke2
 
 ## get the token from following file location. (all token are same)
 
-
+```bash
 [root@rke2-m1 rke2]# cat /var/lib/rancher/rke2/server/token
 K10c3fbaeea3194c08cfbd9f38bee30de444d43103fe8exxxxxxxxxxxxxxxxx::server:my-shared-secret
-
+```
 
 Then update the you can get the token and update the /etc/rancher/rke2/config.yaml token.
 
@@ -74,33 +79,37 @@ rke2-m1   Ready    control-plane,etcd,master   9m31s   v1.24.12+rke2r1
 
 
 ## start services for worker nodes
-
+```bash
 systemctl enable rke2-agent.service
-
+```
 
 
 ## now you can add the worker nodes
+```bash
 mkdir -p /etc/rancher/rke2/
 vi /etc/rancher/rke2/config.yaml
+```
 
 config.yaml
 server: https://rke2-m1.devops.sg.csc:9345
 token: K10fee940b0712a2f59f74d5f62db4393c6a3e5e19xxxxxxxxxxxxxxxxx::server:1ee80a11xxxxxxxxxxxxx54f32d
 
+```bash
 systemctl enable rke2-agent.service
 systemctl start rke2-agent.services
 journalctl -u rke2-agent.service -f 
-
+```
 
 
 ## uninstall script is in /usr/bin/rke2-uninstall.sh
 
+```bash
 curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
 
 systemctl enable rke2-agent.service
 
 systemctl restart rke2-agent.service
-
+```
 
 
 ## Upgrade RKE2
