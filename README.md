@@ -382,11 +382,11 @@ Without this resiliency option, the pod will remain in a "Terminating" state unt
 
 ![PowerStore](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs5.jpg)
 
-From the PowerStore UI, you will see volume attached to the "rke-w2" node. 
+From the PowerStore UI, you will see the volume attached to the "rke-w2" node.
 
 ![PowerStore](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs6.jpg)
 
-You can verify futher in PowerStore events
+You can verify further in PowerStore events.
 
 ![PowerStore evnts](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs7.jpg)
 
