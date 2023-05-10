@@ -26,7 +26,7 @@ To avoid this issue, I installed the cluster with 1.24 and then set up Rancher U
 
 
 This way, you can install to specific version. 
-curl -sfL https://get.rke2.io | INSTALL_RKE2_VERSION=v1.25.9+rke2r1 sh -
+*curl -sfL https://get.rke2.io | INSTALL_RKE2_VERSION=v1.25.9+rke2r1 sh -*
 
 
 To avoid encountering a sha1 issue, it is recommended to utilize the curl command instead of adding the yum repo file.
