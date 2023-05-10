@@ -260,7 +260,9 @@ git clone -b v2.6.0 https://github.com/dell/csi-powerstore.git
 ```
 
 **02. Edit the secret file**
+
 sample values in /csi-powerstore/samples/secret/secret.yaml 
+
 (refer secret.yaml)
 
 **03. create namespace for csi-powerstore**
@@ -287,6 +289,7 @@ powerstore-config   Opaque   1      79s
 ```
 
 **05. copy the sameple values for CSI-PowerStore**
+
 ```bash
 [root@rke2-m1 csi-powerstore]# pwd
 /root/csi-powerstore
@@ -296,6 +299,7 @@ powerstore-config   Opaque   1      79s
 ```
 
 **06. copy sameple powerstore csi helm values and edit**
+
 refer my-powerstore-settings.yaml
 
 When it comes to PowerStore CSI resiliency, enable following podmon parameters,
@@ -303,6 +307,7 @@ When it comes to PowerStore CSI resiliency, enable following podmon parameters,
 ![podmon](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/podmon.jpg)
 
 **07. Install the csi drives**
+
 ```bash
 [root@rke2-m1 dell-csi-helm-installer]# ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml
 ```
@@ -322,7 +327,7 @@ Status of the CSI drives pods,
 **08. create storageClass**
 
 
-there are sample storageclass available under /csi-powerstore/samples/storageclass directory
+there are sample storageclass available under */csi-powerstore/samples/storageclass* directory
 
 ![sc](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sc1.jpg)
 
@@ -334,6 +339,7 @@ Once you edit the storage class yaml file, use 'kubectl apply -f <sc_name.yaml> 
 ## Resiliency Test
 
 In order to enable resiliency you must add following label
+
 ```bash
 podmon.dellemc.com/driver: csi-powerstore
 ```
