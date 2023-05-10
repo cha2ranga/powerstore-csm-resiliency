@@ -17,6 +17,7 @@ Install Rocky Linux 9 vms and update the packages. In this CSI-Drivers installat
 Touch follwoing file on both master and workder nodes
 touch /etc/rancher/rke2/config.yaml
 
+This setup I'm using single master and three worker nodes
 
 **Package installation**
 
@@ -112,7 +113,7 @@ vi /etc/rancher/rke2/config.yaml
 ```
 
 config.yaml
-server: https://rke2-m1.devops.sg.csc:9345
+server: https://rke2-m1.xxxxx.xxxx.csc:9345
 token: K10fee940b0712a2f59f74d5f62db4393c6a3e5e19xxxxxxxxxxxxxxxxx::server:1ee80a11xxxxxxxxxxxxx54f32d
 
 ```bash
@@ -124,6 +125,7 @@ journalctl -u rke2-agent.service -f
 
 !!! uninstall script !!! 
 In case if you want to perform a clean up, you can find the files in follwoing location
+
 ```bash
 /usr/bin/rke2-uninstall.sh
 ```
@@ -168,7 +170,7 @@ Other option is you can pass the values during during helm install
 ```bash
 [root@rke2-m1 ~]# helm install rancher rancher-latest/rancher \
   --namespace cattle-system \
-  --set hostname=rancher.devops.csc \
+  --set hostname=rancher.xxxxx.xxxx \
   --set replicas=1 \
   --set bootstrapPassword=<YOURPASSWORD>
 NAME: rancher
@@ -184,11 +186,11 @@ NOTE: Rancher may take several minutes to fully initialize. Please standby while
 
 Check out our docs at https://rancher.com/docs/
 
-If you provided your own bootstrap password during installation, browse to https://rancher.devops.csc to get started.
+If you provided your own bootstrap password during installation, browse to https://rancher.xxxxx.xxxx to get started.
 
 
 If this is the first time you installed Rancher, get started by running this command and clicking the URL it generates:
-echo https://rancher.devops.csc/dashboard/?setup=$(kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}')
+echo https://rancher.xxxxx.xxxx/dashboard/?setup=$(kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}')
 
 
 To get just the bootstrap password on its own, run:
