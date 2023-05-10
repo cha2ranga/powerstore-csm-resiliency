@@ -1,4 +1,4 @@
-This README document provides instructions on setting up a RKE2 kubernetes cluster and integrate with Dell PowerStore CSI and CSM resiliency for persistent storage. 
+This README will guide you on how to set up an RKE2 Kubernetes cluster and connect it with Dell PowerStore CSI and CSM resiliency for persistent storage.
 
 RKE2 Installation [@RKE2 Installation Guide](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-cluster-setup/rke2-for-rancher) 
 
@@ -10,21 +10,21 @@ Activity flow,
 ![Diagram](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/diagram1.jpg)
 
 
-Install Rocky linux 9 vms and update the packages. In this CSI-Drivers installation, we are going to use iSCSI and NFS options. make sure to install iscsi and multipath packages as well. 
+Install Rocky Linux 9 vms and update the packages. In this CSI-Drivers installation, we will use iSCSI and NFS options. Make sure to install iscsi and multipath packages as well. 
 
 Touch follwoing file on both master and workder nodes
 touch /etc/rancher/rke2/config.yaml
 
 
 ## Package installation
-if you add yum repo file you will end up with sha1 issue. easy way is use curl commad
+To avoid encountering a sha1 issue, it is recommended to utilize the curl command instead of adding the yum repo file.
 
 for the servers, this will install latest stable release 
 ```bash
 curl -sfL https://get.rke2.io | sh -
 ```
 
-for the workers you can first download the script. then set the environment variable as "agent"  
+For the workers, you can first download the script. Then set the environment variable as "agent."  
 (anther way  curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
 
 ```bash
@@ -45,16 +45,16 @@ systemctl enable rke2-server
 systemctl start rke2-server
 journalctl -u rke2-server -f
 ```
-package will be install under /var/lib/rancher/rke2
+Package will be installed under /var/lib/rancher/rke2
 
-## get the token from following file location. (all token are same)
+## get the token from following file location.
 
 ```bash
 [root@rke2-m1 rke2]# cat /var/lib/rancher/rke2/server/token
 K10c3fbaeea3194c08cfbd9f38bee30de444d43103fe8exxxxxxxxxxxxxxxxx::server:my-shared-secret
 ```
 
-Then update the you can get the token and update the /etc/rancher/rke2/config.yaml token.
+Then update the /etc/rancher/rke2/config.yaml token.
 
 
 ## now export the paths. 
@@ -68,10 +68,11 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 alias k=kubectl
 complete -o default -F __start_kubectl k
 ```
-
+```bash
 [root@rke2-m1 ~]# kubectl get nodes
 NAME      STATUS   ROLES                       AGE     VERSION
 rke2-m1   Ready    control-plane,etcd,master   9m31s   v1.24.12+rke2r1
+```
 
 ## this file contains cluster details. you can rename it as kubeconfig and use it. you can even copy it to .kube/config directoy
 
@@ -101,16 +102,11 @@ journalctl -u rke2-agent.service -f
 ```
 
 
-## uninstall script is in /usr/bin/rke2-uninstall.sh (Incase if you want to clean up and reinstall the packages)
-
+## !!! uninstall script is in  !!! 
+In case if you want to perform a clean up, you can find the files in follwoing location
 ```bash
-curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
-
-systemctl enable rke2-agent.service
-
-systemctl restart rke2-agent.service
+/usr/bin/rke2-uninstall.sh
 ```
-
 
 ## Upgrade RKE2
 
@@ -137,7 +133,7 @@ systemctl restart rke2-agent &&  journalctl -u rke2-agent.service -f
 
 ## Install Rancher UI
 
-When I installed cluster with 1.25 or 1.26, helm repo produced an error due to pod security policy. Even though I tried to disable it during helm upgrade, there was no luck.
+When I installed the cluster with version 1.25 or 1.26, the helm repo produced an error due to the pod security policy. Even though I tried to disable it during the helm upgrade, there was no luck.
 
 Then install the cluster with 1.24 and then setup Rancher UI. Later upgrade to 1.26.0 packages.
  
@@ -198,6 +194,8 @@ During this installtion ingress service will be configured. In my case, I'm usin
 Cluster Details
 
 ![Rancher dashboard](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/cluster_details.jpg)
+
+
 ## Install PowerStore CSI Drives - Use helm installation method.
 
 
@@ -313,7 +311,7 @@ In order to enable resiliency you must add following label
 podmon.dellemc.com/driver: csi-powerstore
 ```
 
-Let's crete two statefulsets with powerstore pvc. One with the "podmon.dellemc.com/driver: csi-powerstore" lable
+Let's create two statefulsets with PowerStore pvc. One with the "podmon.dellemc.com/driver: csi-powerstore" lable
 
 statefulset_resiliency.yaml  >>>>> resiliency enabled. 
 
@@ -331,7 +329,7 @@ PVC Status
 ![pvc](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs2.jpg)
 
 
-Let's verify the statefulset configured with resiliency at PowerStore side,
+Let's verify the statefulset configured with resiliency at the PowerStore side,
 As you can see below, PVC is attached to rke2-w1
 
 ![PowerStore](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs3.jpg)
@@ -341,16 +339,16 @@ Now let's shutdown the "rke2-w1" node.
 ![Node Down](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs4.jpg)
 
 
-After few min (lessthan 5min) pod will recreate automatically. As you can see, pod now recreated on "rke-w2" node
-Without this resiliency option, pod will be on "Terminating" state until worker node comes up. Usually manual clean up required. 
+The pod will automatically recreate within a few minutes (less than 5 minutes). You can observe that the recreated pod is now on the "rke-w2" node. 
+Without this resiliency option, the pod will remain in a "Terminating" state until the worker node is operational again, which typically requires manual cleaning up. 
 
 ![PowerStore](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs5.jpg)
 
-From the PowerStore UI, now you will see volume is attached to "rke-w2" node. 
+From the PowerStore UI, you will see volume attached to the "rke-w2" node. 
 
 ![PowerStore](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs6.jpg)
 
-You can verify futher in PowerStore evnts
+You can verify futher in PowerStore events
 
 ![PowerStore evnts](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs7.jpg)
 
