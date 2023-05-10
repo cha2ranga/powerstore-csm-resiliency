@@ -306,7 +306,7 @@ When it comes to PowerStore CSI resiliency, enable following podmon parameters,
 Since we are installing only iSCSI and NFS, you can ignore the NVMe warnings. 
 Installation output. 
 
-![CSI Drivers Installation Output](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/csi_installation_output.jpg)
+![CSI Drivers Installation Output](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/csi_installation_output2.jpg)
 
 
 Status of the CSI drives pods,
