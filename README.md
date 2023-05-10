@@ -316,6 +316,8 @@ podmon.dellemc.com/driver: csi-powerstore
 Let's crete two statefulsets with powerstore pvc. One with the "podmon.dellemc.com/driver: csi-powerstore" lable
 
 statefulset_resiliency.yaml  >>>>> resiliency enabled. 
+
+
 statefulset.yaml >>>>> no resiliency configured
 
 You can apply both yaml file to create statefulset
@@ -339,7 +341,7 @@ Now let's shutdown the "rke2-w1" node.
 ![Node Down](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs4.jpg)
 
 
-Now you can see after few min (lessthan 5min) pod will recreate automatically. As you can see, pod now recreated on "rke-w2" node
+After few min (lessthan 5min) pod will recreate automatically. As you can see, pod now recreated on "rke-w2" node
 
 ![PowerStore](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs5.jpg)
 
