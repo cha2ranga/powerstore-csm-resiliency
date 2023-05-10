@@ -253,20 +253,23 @@ NAS Server IP: 172.24.xxx.xxx
 ```
 
 
-01. Clone the powerstore CSI drives repo
+**01. Clone the powerstore CSI drives repo**
 
 ```bash
 git clone -b v2.6.0 https://github.com/dell/csi-powerstore.git
 ```
 
-02. Edit the secret file (sample values in /csi-powerstore/samples/secret/secret.yaml) (refer secret.yaml)
+**02. Edit the secret file**
+sample values in /csi-powerstore/samples/secret/secret.yaml 
+(refer secret.yaml)
 
-03. create namespace for csi-powerstore
+**03. create namespace for csi-powerstore**
+
 ```bash
 k create ns csi-powerstore
 ```
 
-04. create secret and verify
+**04. create secret and verify**
 
 ```bash
 [root@rke2-m1 secret]# pwd
@@ -283,7 +286,7 @@ powerstore-config   Opaque   1      79s
 [root@rke2-m1 secret]#
 ```
 
-05. copy the sameple values for CSI-PowerStore
+**05. copy the sameple values for CSI-PowerStore**
 ```bash
 [root@rke2-m1 csi-powerstore]# pwd
 /root/csi-powerstore
@@ -292,13 +295,14 @@ powerstore-config   Opaque   1      79s
 [root@rke2-m1 dell-csi-helm-installer]#
 ```
 
-06. copy sameple powerstore csi helm values and edit. (refer my-powerstore-settings.yaml)
+**06. copy sameple powerstore csi helm values and edit**
+refer my-powerstore-settings.yaml
 
 When it comes to PowerStore CSI resiliency, enable following podmon parameters,
 
 ![podmon](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/podmon.jpg)
 
-07. Install the csi drives
+**07. Install the csi drives**
 ```bash
 [root@rke2-m1 dell-csi-helm-installer]# ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml
 ```
@@ -315,7 +319,8 @@ Status of the CSI drives pods,
 ![Drive Status](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/csi_driver_pods.jpg)
 
 
-08. create storageclass 
+**08. create storageClass**
+
 
 there are sample storageclass available under /csi-powerstore/samples/storageclass directory
 
@@ -335,10 +340,10 @@ podmon.dellemc.com/driver: csi-powerstore
 
 Let's create two statefulsets with PowerStore pvc. One with the "podmon.dellemc.com/driver: csi-powerstore" lable
 
-statefulset_resiliency.yaml  >>>>> resiliency enabled. 
+**statefulset_resiliency.yaml**  >>>>> *resiliency enabled*
 
 
-statefulset.yaml >>>>> no resiliency configured
+**statefulset.yaml** >>>>> *no resiliency configured*
 
 You can apply both yaml file to create statefulset
 
