@@ -358,7 +358,7 @@ Let's create two statefulsets with PowerStore pvc. One with the "podmon.dellemc.
 
 You can apply both yaml file to create statefulset
 
-Statis of the staefulsets,
+Status of the staefulsets,
 
 ![workloads](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs1.jpg)
 
