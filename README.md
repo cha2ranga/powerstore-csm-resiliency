@@ -16,7 +16,15 @@ Touch follwoing file on both master and workder nodes
 touch /etc/rancher/rke2/config.yaml
 
 
-## Package installation
+Package installation
+When I installed the cluster with version 1.25 or 1.26, the helm repo produced an error due to the pod security policy. Even though I tried to disable it during the helm upgrade, there was no luck.
+
+Then install the cluster with 1.24 and then setup Rancher UI. Later upgrade to 1.26.0 packages.
+
+This way, you can install to specific version. 
+curl -sfL https://get.rke2.io | INSTALL_RKE2_VERSION=v1.25.9+rke2r1 sh -
+
+
 To avoid encountering a sha1 issue, it is recommended to utilize the curl command instead of adding the yum repo file.
 
 for the servers, this will install latest stable release 
@@ -39,7 +47,9 @@ Type of rke2 service. Can be either "server" or "agent".
 Default is "server".
 
 
-## enable services for server nodes
+Enable services for server nodes
+
+
 ```bash
 systemctl enable rke2-server
 systemctl start rke2-server
@@ -47,7 +57,8 @@ journalctl -u rke2-server -f
 ```
 Package will be installed under /var/lib/rancher/rke2
 
-## get the token from following file location.
+
+Get the token from following file location.
 
 ```bash
 [root@rke2-m1 rke2]# cat /var/lib/rancher/rke2/server/token
@@ -57,7 +68,8 @@ K10c3fbaeea3194c08cfbd9f38bee30de444d43103fe8exxxxxxxxxxxxxxxxx::server:my-share
 Then update the /etc/rancher/rke2/config.yaml token.
 
 
-## now export the paths. 
+Let's export the paths. 
+
 ```bash
 export CONTAINER_RUNTIME_ENDPOINT=unix:///run/k3s/containerd/containerd.sock
 export CONTAINERD_ADDRESS=/run/k3s/containerd/containerd.sock
@@ -74,18 +86,19 @@ NAME      STATUS   ROLES                       AGE     VERSION
 rke2-m1   Ready    control-plane,etcd,master   9m31s   v1.24.12+rke2r1
 ```
 
-## this file contains cluster details. you can rename it as kubeconfig and use it. you can even copy it to .kube/config directoy
+Following file contains cluster details. you can rename it as kubeconfig and use it. you can even copy it to .kube/config directoy
 
 /etc/rancher/rke2/rke2.yaml
 
 
-## start services for worker nodes
+Let's start services for worker nodes
+
 ```bash
 systemctl enable rke2-agent.service
 ```
 
 
-## now you can add the worker nodes
+Now you can add the worker nodes
 ```bash
 mkdir -p /etc/rancher/rke2/
 vi /etc/rancher/rke2/config.yaml
@@ -114,16 +127,20 @@ upgrade to latest version.
 ```bash
  curl -sfL https://get.rke2.io | INSTALL_RKE2_CHANNEL=latest sh - && systemctl restart rke2-agent
 ```
-## upgrade to specific version
+
+Upgrade to specific version
 ```bash
 https://github.com/rancher/rke2/releases/tag/v1.25.9%2Brke2r1
 ```
-## Master node upgrade
+
+Master node upgrade
+
 ```bash
 curl -sfL https://get.rke2.io | INSTALL_RKE2_VERSION=v1.25.9+rke2r1 sh -
 systemctl restart rke2-server && journalctl -u rke2-server -f
 ```
-## Workder Node upgrade
+
+Workder Node upgrade
 ```bash
 curl -sfL https://get.rke2.io | INSTALL_RKE2_VERSION=v1.25.9+rke2r1 sh -
 systemctl restart rke2-agent &&  journalctl -u rke2-agent.service -f
@@ -133,12 +150,7 @@ systemctl restart rke2-agent &&  journalctl -u rke2-agent.service -f
 
 ## Install Rancher UI
 
-When I installed the cluster with version 1.25 or 1.26, the helm repo produced an error due to the pod security policy. Even though I tried to disable it during the helm upgrade, there was no luck.
-
-Then install the cluster with 1.24 and then setup Rancher UI. Later upgrade to 1.26.0 packages.
- 
 You can download the values file for rancher helm. Then edit that one as well. In this case, at least you will know your editing settings.
-
 
 
 ![Helm Values](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/helm_values1.jpg)
@@ -196,7 +208,7 @@ Cluster Details
 ![Rancher dashboard](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/cluster_details.jpg)
 
 
-## Install PowerStore CSI Drives - Use helm installation method.
+## Install PowerStore CSI Drives - Used helm installation method.
 
 
 [@Dell PowerStore CSI - Installation guide Documentation](https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerstore/#prerequisites) 
