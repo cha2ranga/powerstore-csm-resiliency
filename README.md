@@ -20,7 +20,6 @@ touch /etc/rancher/rke2/config.yaml
 
 **Package installation**
 
-
 When I installed the cluster with version 1.25 or 1.26, the helm repo produced an error due to the pod security policy. Even though I tried to disable it during the helm upgrade, there was no luck.
 
 Then install the cluster with 1.24 and then setup Rancher UI. Later upgrade to 1.26.0 packages.
@@ -38,7 +37,10 @@ curl -sfL https://get.rke2.io | sh -
 ```
 
 For the workers, you can first download the script. Then set the environment variable as "agent."  
-(anther way  curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
+(anther way  
+```bash
+curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
+```
 
 ```bash
 curl -sfL https://get.rke2.io --output install.sh
@@ -52,7 +54,7 @@ Type of rke2 service. Can be either "server" or "agent".
 Default is "server".
 
 
-Enable services for server nodes
+**Enable services for server nodes**
 
 
 ```bash
