@@ -308,7 +308,7 @@ Once you edit the storage class yaml file, use 'kubectl apply -f <sc_name.yaml> 
 
 ## Resiliency Test
 
-In order to enable resiliency you must add following labes
+In order to enable resiliency you must add following label
 ```bash
 podmon.dellemc.com/driver: csi-powerstore
 ```
@@ -342,6 +342,7 @@ Now let's shutdown the "rke2-w1" node.
 
 
 After few min (lessthan 5min) pod will recreate automatically. As you can see, pod now recreated on "rke-w2" node
+Without this resiliency option, pod will be on "Terminating" state until worker node comes up. Usually manual clean up required. 
 
 ![PowerStore](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/sfs5.jpg)
 
