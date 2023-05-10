@@ -348,8 +348,13 @@ Let's create two statefulsets with PowerStore pvc. One with the "podmon.dellemc.
 
 **statefulset_resiliency.yaml**  >>>>> *resiliency enabled*
 
+[@statefulset_resiliency.yaml](https://raw.githubusercontent.com/cha2ranga/powerstore-csm-resiliency/main/statefulset_resiliency.yaml) 
+
 
 **statefulset.yaml** >>>>> *no resiliency configured*
+
+[@statefulset.yaml](https://raw.githubusercontent.com/cha2ranga/powerstore-csm-resiliency/main/statefulset.yaml) 
+
 
 You can apply both yaml file to create statefulset
 
