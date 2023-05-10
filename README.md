@@ -4,14 +4,16 @@ RKE2 Installation [@RKE2 Installation Guide](https://ranchermanager.docs.rancher
 
 
 
-## RKE2 Installation
-
-Activity flow,
+## Activity flow,
 ![Diagram](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/diagram1.jpg)
 
 
+## Create Rocky 9 VMS and upgrade the packages. 
+VM packages and upgrade guide  [@K8s VMs setup](https://github.com/cha2ranga/k8s-installation) 
+
 Install Rocky Linux 9 vms and update the packages. In this CSI-Drivers installation, we will use iSCSI and NFS options. Make sure to install iscsi and multipath packages as well. 
 
+## Create RKE2 Cluster
 Touch follwoing file on both master and workder nodes
 touch /etc/rancher/rke2/config.yaml
 
@@ -115,7 +117,7 @@ journalctl -u rke2-agent.service -f
 ```
 
 
-## !!! uninstall script is in  !!! 
+!!! uninstall script !!! 
 In case if you want to perform a clean up, you can find the files in follwoing location
 ```bash
 /usr/bin/rke2-uninstall.sh
