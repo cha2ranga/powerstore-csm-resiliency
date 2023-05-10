@@ -209,8 +209,9 @@ volumesnapshot CRD is avaialble with the default RKE2 installation.
 ![VolumeSnapshot CRD](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/vs_crd.jpg)
 
 
-PwwerStore Details
+PowerStore Details
 
+```bash
 Management IP Address: 172.24.xxx.xxx
 
 
@@ -230,7 +231,7 @@ NAS Server Name: csi-nas
 
 
 NAS Server IP: 172.24.xxx.xxx
-
+```
 
 
 01. Clone the powerstore CSI drives repo
