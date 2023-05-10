@@ -22,7 +22,7 @@ touch /etc/rancher/rke2/config.yaml
 
 When I installed the cluster with version 1.25 or 1.26, the helm repo produced an error due to the pod security policy. Even though I tried to disable it during the helm upgrade, there was no luck.
 
-Then install the cluster with 1.24 and then setup Rancher UI. Later upgrade to 1.26.0 packages.
+To avoid this issue, I installed the cluster with 1.24 and then set up Rancher UI. Later upgrade to 1.26.0 packages.
 
 
 This way, you can install to specific version. 
