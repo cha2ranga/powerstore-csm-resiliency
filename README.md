@@ -124,6 +124,7 @@ journalctl -u rke2-agent.service -f
 
 
 !!! uninstall script !!! 
+
 In case if you want to perform a clean up, you can find the files in follwoing location
 
 ```bash
