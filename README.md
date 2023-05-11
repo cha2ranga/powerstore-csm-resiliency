@@ -217,7 +217,7 @@ Cluster Details
 ![Rancher dashboard](https://github.com/cha2ranga/powerstore-csm-resiliency/blob/main/images/cluster_details.jpg)
 
 
-## Install PowerStore CSI Drives - Used helm installation method.
+## Install PowerStore CSI Drives - with Helm installation method.
 
 
 [@Dell PowerStore CSI - Installation guide Documentation](https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerstore/#prerequisites) 
