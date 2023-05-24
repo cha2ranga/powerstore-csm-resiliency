@@ -47,6 +47,7 @@ curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
 curl -sfL https://get.rke2.io --output install.sh
 chmod +x install.sh
 export INSTALL_RKE2_TYPE=agent
+export INSTALL_RKE2_VERSION=v1.xx.x+rke2r1
  ./install.sh
 ```
 
