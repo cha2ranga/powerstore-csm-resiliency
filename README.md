@@ -300,7 +300,7 @@ powerstore-config   Opaque   1      79s
 [root@rke2-m1 dell-csi-helm-installer]#
 ```
 
-**06. copy sameple powerstore csi helm values and edit**
+**06. copy sample powerstore csi helm values and edit**
 
 refer my-powerstore-settings.yaml
 
